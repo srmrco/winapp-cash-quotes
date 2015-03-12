@@ -1,0 +1,39 @@
+﻿<Page
+    x:Class="CashQuotes.QuoteListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CashQuotes"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Pivot Title="Cash Quote">
+            <PivotItem Header="USD">
+                <GridView x:Name="ItemGridView"
+                        Background="{StaticResource ApplicationPageBackgroundThemeBrush}" 
+                        ShowsScrollingPlaceholders="False" 
+                        VerticalAlignment="Top" 
+                        ScrollViewer.VerticalScrollBarVisibility="Auto" 
+                        ScrollViewer.HorizontalScrollBarVisibility="Auto" 
+                        SelectionMode="None" />
+            </PivotItem>
+            <PivotItem Header="EUR">
+                <Grid/>
+            </PivotItem>
+        </Pivot>
+    </Grid>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Name="RefreshAppBarButton" Label="Refresh" Icon="Refresh" Click="RefreshAppBarButton_Click" />
+                <AppBarButton x:Name="SortAppBarButton" Label="Sort" Icon="Sort" Click="SortAppBarButton_OnClick"/>
+            </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton x:Name="AboutAppBarButton" Label="about"  />
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+</Page>
