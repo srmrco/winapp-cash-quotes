@@ -50,8 +50,15 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RbcQuoteServiceTest.cs" />
+    <Compile Include="Utils\MockQuoteDataProvider.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\QuoteService\QuoteService.csproj">
+      <Project>{10FDA89D-C911-458C-8E3B-B6ACEC9701C5}</Project>
+      <Name>QuoteService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
