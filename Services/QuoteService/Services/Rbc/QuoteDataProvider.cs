@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net.Http;
 using QuoteService.Interfaces;
+using QuoteService.Utils;
 
 namespace QuoteService.Services.Rbc
 {
@@ -19,7 +21,23 @@ namespace QuoteService.Services.Rbc
 
 		public string GetQuoteDocumentText()
 		{
-			throw new NotImplementedException();
+			var result = string.Empty;
+			var buildUrl = QueryBuilder.Build();
+
+			Uri resourceUri;
+			if (!RequestHelper.TryGetUri(buildUrl, out resourceUri))
+				return null;
+
+			using (var client = new HttpClient())
+			{
+				var response = client.GetAsync(resourceUri).Result;
+				if (response.IsSuccessStatusCode)
+				{
+					result = response.Content.ReadAsStringAsync().Result;
+				}
+			}
+
+			return result;
 		}
 	}
 }

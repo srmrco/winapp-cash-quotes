@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.IO;
 using QuoteService.Interfaces;
 
 namespace Tests.Unit.Utils
@@ -9,7 +9,9 @@ namespace Tests.Unit.Utils
 
 		public string GetQuoteDocumentText()
 		{
-			throw new NotImplementedException();
+			var result = File.ReadAllText("../../MockData/test-data.html");
+
+			return result;
 		}
 	}
 }

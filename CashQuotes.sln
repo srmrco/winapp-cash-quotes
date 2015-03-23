@@ -16,6 +16,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5D6C294B-BD74-430B-B71E-4F5777070807}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit", "Tests\Tests.Unit\Tests.Unit.csproj", "{B72659D8-AFB6-4180-B248-658B5951B5C4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{10FDA89D-C911-458C-8E3B-B6ACEC9701C5} = {10FDA89D-C911-458C-8E3B-B6ACEC9701C5}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteService", "Services\QuoteService\QuoteService.csproj", "{10FDA89D-C911-458C-8E3B-B6ACEC9701C5}"
 EndProject

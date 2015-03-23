@@ -55,8 +55,11 @@
     <Compile Include="Utils\MockQuoteDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="MockData\test-data.html" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\Services\QuoteService\QuoteService.csproj">
-      <Project>{10FDA89D-C911-458C-8E3B-B6ACEC9701C5}</Project>
+      <Project>{10fda89d-c911-458c-8e3b-b6acec9701c5}</Project>
       <Name>QuoteService</Name>
     </ProjectReference>
   </ItemGroup>
