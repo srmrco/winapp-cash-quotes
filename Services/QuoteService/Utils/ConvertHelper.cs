@@ -1,15 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace QuoteService.Utils
 {
-	public class ConvertHelper
+	public static class ConvertHelper
 	{
-		public static readonly CultureInfo DefaultCultureInfo = new CultureInfo("ru-RU");
+		private static readonly CultureInfo DefaultCultureInfo = new CultureInfo("ru-RU");
 
 		public static decimal? ConvertDecimal(string text)
 		{

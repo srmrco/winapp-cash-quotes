@@ -81,8 +81,13 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
+    <ProjectReference Include="..\..\Services\QuoteService\QuoteService.csproj">
+      <Project>{10FDA89D-C911-458C-8E3B-B6ACEC9701C5}</Project>
+      <Name>QuoteService</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\ItemViewer.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

@@ -1,0 +1,40 @@
+﻿<UserControl
+    x:Class="CashQuotes.Controls.ItemViewer"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:CashQuotes.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="100" d:DesignWidth="350">
+        <Grid HorizontalAlignment="Left" 
+          Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Width="auto">
+            <StackPanel Margin="10,10,0,0" Orientation="Vertical">
+                <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                    <TextBlock x:Name="TxtBuyRate" TextWrapping="Wrap" 
+                           Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+                           FontSize="25" FontWeight="Bold" Width="110" 
+                           VerticalAlignment="Center" HorizontalAlignment="Left" 
+                           FontFamily="Segoe UI" Text="165.12 р."/>
+                    <TextBlock x:Name="TxtSellRate" TextWrapping="Wrap" Margin="20 0"
+                           Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+                           FontSize="25" FontWeight="Bold" Width="110" 
+                           VerticalAlignment="Center" HorizontalAlignment="Left" 
+                           FontFamily="Segoe UI" Text="169.12 р."/>
+
+                </StackPanel>
+                <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                    <TextBlock x:Name="TxtName" TextWrapping="Wrap" 
+                           Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+                           FontSize="14.667" FontWeight="Light" Width="250" 
+                           VerticalAlignment="Center" HorizontalAlignment="Left" 
+                           FontFamily="Segoe UI" Text="Street address"/>
+                    <TextBlock x:Name="TxtDistance" TextWrapping="Wrap" Margin="0"
+                           Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+                           FontSize="18" FontWeight="Normal" Width="80" 
+                           VerticalAlignment="Center" HorizontalAlignment="Left" 
+                           FontFamily="Segoe UI" Text="20 km" TextAlignment="Right"/>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </UserControl>

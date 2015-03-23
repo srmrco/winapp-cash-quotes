@@ -5,19 +5,32 @@
     xmlns:local="using:CashQuotes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:CashQuotes.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
+    <Page.Resources>
+        <DataTemplate x:Key="GridItemControlTemplate">
+            <controls:ItemViewer/>
+        </DataTemplate>
+        <DataTemplate x:Key="GridHeaderControlTemplate">
+            <controls:ItemHeader />
+        </DataTemplate>
+    </Page.Resources>
+    
     <Grid>
         <Pivot Title="Cash Quote">
             <PivotItem Header="USD">
                 <GridView x:Name="ItemGridView"
                         Background="{StaticResource ApplicationPageBackgroundThemeBrush}" 
+                        ItemTemplate="{StaticResource GridItemControlTemplate}" 
+                        HeaderTemplate="{StaticResource GridHeaderControlTemplate}"
                         ShowsScrollingPlaceholders="False" 
                         VerticalAlignment="Top" 
                         ScrollViewer.VerticalScrollBarVisibility="Auto" 
                         ScrollViewer.HorizontalScrollBarVisibility="Auto" 
-                        SelectionMode="None" />
+                        SelectionMode="None"
+                        ContainerContentChanging="ItemGridView_ContainerContentChanging" />
             </PivotItem>
             <PivotItem Header="EUR">
                 <Grid/>

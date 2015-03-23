@@ -46,6 +46,7 @@
     <Compile Include="Services\Rbc\QuoteService.cs" />
     <Compile Include="Utils\ConvertHelper.cs" />
     <Compile Include="Utils\ExtensionMethods.cs" />
+    <Compile Include="Utils\FormatHelper.cs" />
     <Compile Include="Utils\RequestHelper.cs" />
   </ItemGroup>
   <ItemGroup>
