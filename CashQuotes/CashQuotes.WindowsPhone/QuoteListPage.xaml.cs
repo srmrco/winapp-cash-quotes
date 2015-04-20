@@ -106,5 +106,16 @@ namespace CashQuotes
 			// TODO: show a menu to choose how to sort the grid data
 		}
 
+		private void ItemsGridView_OnItemClick(object sender, ItemClickEventArgs e)
+		{
+			var dataItem = e.ClickedItem as ExchangeData;
+
+			if (dataItem != null)
+			{
+				var mainFrame = MainPage.Current.FindName("MainFrame") as Frame;
+				if (mainFrame != null)
+					mainFrame.Navigate(typeof(QuoteDetailsPage), dataItem);
+			}
+		}
 	}
 }

@@ -30,7 +30,8 @@
                         ScrollViewer.VerticalScrollBarVisibility="Auto" 
                         ScrollViewer.HorizontalScrollBarVisibility="Auto" 
                         SelectionMode="None"
-                        ContainerContentChanging="ItemGridView_ContainerContentChanging" />
+                        ContainerContentChanging="ItemGridView_ContainerContentChanging"
+                        IsItemClickEnabled="True" ItemClick="ItemsGridView_OnItemClick" />
             </PivotItem>
             <PivotItem Header="EUR">
                 <Grid/>
