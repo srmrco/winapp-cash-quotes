@@ -23,5 +23,13 @@ namespace QuoteService.Utils
 
 			return string.Empty;
 		}
+
+		public static string FormatDistance(decimal? distance)
+		{
+			if (distance.HasValue)
+				return string.Format("{0} km", distance.Value.ToString("#.#", DefaultCultureInfo));
+
+			return string.Empty;
+		}
 	}
 }

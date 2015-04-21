@@ -6,6 +6,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Services.Maps;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -41,7 +42,6 @@ namespace CashQuotes
 		/// This parameter is typically used to configure the page.</param>
 		protected async override void OnNavigatedTo(NavigationEventArgs e)
 		{
-			//mapPlace.MapServiceToken = "token";
 			var quoteData = e.Parameter as ExchangeData;
 
 			if (quoteData == null)
@@ -49,10 +49,35 @@ namespace CashQuotes
 
 			BuyPriceBlock.Text = FormatHelper.FormatMoney(quoteData.BuyRate);
 			SellPriceBlock.Text = FormatHelper.FormatMoney(quoteData.SellRate);
+			DistanceBlock.ClearValue(TextBlock.TextProperty);
 
-			var locator = new Geolocator { DesiredAccuracyInMeters = 50 };
-			var position = await locator.GetGeopositionAsync();
-			await mapPlace.TrySetViewAsync(position.Coordinate.Point, 18D);
+			try
+			{
+				var currentGeoposition = rootPage.CurrentGeoposition;
+
+				var targets = await MapLocationFinder.FindLocationsAsync(quoteData.Address, currentGeoposition.Coordinate.Point);
+				if (targets.Status != MapLocationFinderStatus.Success || targets.Locations.Count == 0)
+				{
+					await MapPlace.TrySetViewAsync(currentGeoposition.Coordinate.Point, 16D);
+					return;
+				}
+
+				//TODO set token
+				//MapPlace.MapServiceToken = "token";
+				var target = targets.Locations[0].Point;
+				await MapPlace.TrySetViewAsync(target, 16D);
+
+				//TODO refactor this to some place closer to QuoteService, ideally I should calculate the distance in 
+				// background and have it displayed afterwards
+				quoteData.Distance = (decimal?)GeoHelper.DistanceTo(
+					currentGeoposition.Coordinate.Latitude, currentGeoposition.Coordinate.Longitude, target.Position.Latitude, target.Position.Longitude);
+
+				DistanceBlock.Text = FormatHelper.FormatDistance(quoteData.Distance);
+			}
+			catch (Exception ex)
+			{
+				//TODO handle geo exception
+			}
 		}
 	}
 }

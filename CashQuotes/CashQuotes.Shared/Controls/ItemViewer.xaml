@@ -28,13 +28,19 @@
                            Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
                            FontSize="14.667" FontWeight="Light" Width="250" 
                            VerticalAlignment="Center" HorizontalAlignment="Left" 
-                           FontFamily="Segoe UI" Text="Street address"/>
+                           FontFamily="Segoe UI" Text="Name of the place"/>
+                    
                     <TextBlock x:Name="TxtDistance" TextWrapping="Wrap" Margin="0"
                            Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
                            FontSize="18" FontWeight="Normal" Width="80" 
                            VerticalAlignment="Center" HorizontalAlignment="Left" 
                            FontFamily="Segoe UI" Text="20 km" TextAlignment="Right"/>
                 </StackPanel>
+                <TextBlock Name="TxtAddress" TextWrapping="Wrap" Margin="0"
+                           Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+                           FontSize="16" FontWeight="Normal" Width="auto" 
+                           VerticalAlignment="Center" HorizontalAlignment="Left" 
+                           FontFamily="Segoe UI" Text="Address line" TextAlignment="Left"/>
             </StackPanel>
         </Grid>
     </UserControl>

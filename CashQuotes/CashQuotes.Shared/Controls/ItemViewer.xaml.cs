@@ -26,16 +26,20 @@ namespace CashQuotes.Controls
 			TxtName.Opacity = 0;
 			TxtBuyRate.Opacity = 0;
 			TxtSellRate.Opacity = 0;
+			TxtAddress.Opacity = 0;
 		}
 
 		/// <summary>
 		/// Visualize the Title by updating the TextBlock for Title and setting Opacity
 		/// to 1.
 		/// </summary>
-		public void ShowName()
+		public void ShowNameAndAddress()
 		{
 			TxtName.Text = _item.Name;
 			TxtName.Opacity = 1;
+
+			TxtAddress.Text = _item.Address;
+			TxtAddress.Opacity = 1;
 		}
 
 		/// <summary>
@@ -64,6 +68,7 @@ namespace CashQuotes.Controls
 		{
 			_item = null;
 			TxtName.ClearValue(TextBlock.TextProperty);
+			TxtAddress.ClearValue(TextBlock.TextProperty);
 			TxtBuyRate.ClearValue(TextBlock.TextProperty);
 			TxtSellRate.ClearValue(TextBlock.TextProperty);
 			TxtDistance.ClearValue(TextBlock.TextProperty);

@@ -61,6 +61,19 @@ namespace QuoteService.Services.Rbc
 							dataItem.DateCreated = dataItem.DateCreated.AddTicks(time.Ticks);
 					}
 
+					var additionalInfo = cells.GetHtmlNodeByClass("info");
+					var addressItem = additionalInfo.Descendants("span").FirstOrDefault(s => s.Attributes["id"].Value == "address");
+					if (addressItem != null)
+						dataItem.Address = addressItem.InnerText;
+
+					// cleann data: sometimes they put links into address hidden field
+					var htmlEntitiesStart = dataItem.Address.IndexOf("&lt;", StringComparison.Ordinal);
+					if (htmlEntitiesStart > 0)
+						dataItem.Address = dataItem.Address.Remove(htmlEntitiesStart).Trim();
+
+					// clean data: address may be inside name :(
+					dataItem.Name = dataItem.Name.Replace(dataItem.Address, string.Empty);
+
 					result.Add(dataItem);
 				}
 			}

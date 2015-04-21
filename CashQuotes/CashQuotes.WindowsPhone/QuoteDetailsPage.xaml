@@ -11,8 +11,8 @@
 
     <Grid>
         <StackPanel Orientation="Vertical" Margin="10,10,10,0">
-            <maps:MapControl Name="mapPlace"
-                MinHeight="300" VerticalAlignment="Top" Margin="0 10"
+            <maps:MapControl Name="MapPlace"
+                MinHeight="300" VerticalAlignment="Top" Margin="0 10" TrafficFlowVisible="True"
                              />
             
             <StackPanel Orientation="Horizontal" Margin="30 10 0 0"
@@ -33,6 +33,13 @@
                                Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
                                FontSize="25" FontWeight="Bold"/>
                 </StackPanel>
+
+                
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0 10 0 0">
+                <TextBlock x:Name="DistanceBlock" Text="1.1 km" 
+                               Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+                               FontSize="18" />
             </StackPanel>
         </StackPanel>
     </Grid>

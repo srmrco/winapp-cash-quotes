@@ -72,7 +72,7 @@ namespace CashQuotes
 			}
 			else if (args.Phase == 2)
 			{
-				iv.ShowName();
+				iv.ShowNameAndAddress();
 				iv.ShowDistance();
 			}
 

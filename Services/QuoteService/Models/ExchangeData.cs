@@ -18,6 +18,8 @@ namespace QuoteService.Models
 
 		public DateTime DateCreated { get; set; }
 
+		public string Address { get; set; }
+
 		public decimal? Distance { get; set; }
 	}
 }
