@@ -74,6 +74,10 @@ namespace QuoteService.Services.Rbc
 					// clean data: address may be inside name :(
 					dataItem.Name = dataItem.Name.Replace(dataItem.Address, string.Empty);
 
+					// clean data: remove everything inside parentheses
+					if (dataItem.Name.IndexOf("(", StringComparison.Ordinal) > 0 && dataItem.Name.IndexOf(")", StringComparison.Ordinal) > 0)
+						dataItem.Name = dataItem.Name.Split('(', ')')[1];
+
 					result.Add(dataItem);
 				}
 			}

@@ -36,6 +36,5 @@ namespace QuoteService.Utils
 
 			return result;
 		}
-
 	}
 }
