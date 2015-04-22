@@ -53,12 +53,12 @@ namespace CashQuotes
 
 			try
 			{
-				var currentGeoposition = rootPage.CurrentGeoposition;
+				var currentGeoposition = rootPage.CurrentGeoposition.Coordinate.Point;
 
-				var targets = await MapLocationFinder.FindLocationsAsync(quoteData.Address, currentGeoposition.Coordinate.Point);
+				var targets = await MapLocationFinder.FindLocationsAsync(quoteData.Address, currentGeoposition);
 				if (targets.Status != MapLocationFinderStatus.Success || targets.Locations.Count == 0)
 				{
-					await MapPlace.TrySetViewAsync(currentGeoposition.Coordinate.Point, 16D);
+					await MapPlace.TrySetViewAsync(currentGeoposition, 16D);
 					return;
 				}
 
@@ -70,7 +70,7 @@ namespace CashQuotes
 				//TODO refactor this to some place closer to QuoteService, ideally I should calculate the distance in 
 				// background and have it displayed afterwards
 				quoteData.Distance = (decimal?)GeoHelper.DistanceTo(
-					currentGeoposition.Coordinate.Latitude, currentGeoposition.Coordinate.Longitude, target.Position.Latitude, target.Position.Longitude);
+					currentGeoposition.Position.Latitude, currentGeoposition.Position.Longitude, target.Position.Latitude, target.Position.Longitude);
 
 				DistanceBlock.Text = FormatHelper.FormatDistance(quoteData.Distance);
 			}

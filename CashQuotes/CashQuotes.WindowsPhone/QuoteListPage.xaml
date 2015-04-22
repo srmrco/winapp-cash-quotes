@@ -16,6 +16,23 @@
         <DataTemplate x:Key="GridHeaderControlTemplate">
             <controls:ItemHeader />
         </DataTemplate>
+
+        <!-- Flyout related -->
+        <Style x:Key="SortFlyoutPresenter" TargetType="FlyoutPresenter">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+        
+        <Flyout x:Key="SortMenuFlyout" FlyoutPresenterStyle="{StaticResource SortFlyoutPresenter}"
+                    Placement="Full"
+                    Opening="FlyoutBase_OnOpening" Closed="FlyoutBase_OnClosed">
+            <Grid Background="Transparent" RequestedTheme="Dark" >
+                <StackPanel VerticalAlignment="Bottom" Background="{ThemeResource MenuFlyoutBackgroundThemeBrush}">
+                    <Button Content="best buy" Click="ButtonOnFlyout_Click" Tag="buy" Style="{ThemeResource SortFlyoutButtonStyle}" />
+                    <Button Content="best sell" Click="ButtonOnFlyout_Click" Tag="sell" Style="{ThemeResource SortFlyoutButtonStyle}" />
+                    <Button Content="nearest first" Click="ButtonOnFlyout_Click" Tag="distance" Style="{ThemeResource SortFlyoutButtonStyle}" />
+                </StackPanel>
+            </Grid>
+        </Flyout>
     </Page.Resources>
     
     <Grid>

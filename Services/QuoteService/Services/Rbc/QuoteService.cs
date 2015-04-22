@@ -24,7 +24,15 @@ namespace QuoteService.Services.Rbc
 
 		public IEnumerable<ExchangeData> GetExchangeRates()
 		{
-			var result = new List<ExchangeData>();
+			var sorter = new ExchangeDataSorter(ExchangeDataSortField.ByBuyRate);
+			var result = GetExchangeRates(sorter);
+
+			return result;
+		}
+
+		public IEnumerable<ExchangeData> GetExchangeRates(ExchangeDataSorter sorter)
+		{
+			var result = new SortedSet<ExchangeData>(sorter);
 			var dataText = DataProvider.GetQuoteDocumentText();
 
 			if (string.IsNullOrEmpty(dataText))
@@ -66,7 +74,7 @@ namespace QuoteService.Services.Rbc
 					if (addressItem != null)
 						dataItem.Address = addressItem.InnerText;
 
-					// cleann data: sometimes they put links into address hidden field
+					// clean data: sometimes they put links into address hidden field
 					var htmlEntitiesStart = dataItem.Address.IndexOf("&lt;", StringComparison.Ordinal);
 					if (htmlEntitiesStart > 0)
 						dataItem.Address = dataItem.Address.Remove(htmlEntitiesStart).Trim();

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using QuoteService.Models;
+using QuoteService.Utils;
 
 namespace QuoteService.Interfaces
 {
@@ -8,5 +9,7 @@ namespace QuoteService.Interfaces
 		IQuoteDataProvider DataProvider { get; }
 
 		IEnumerable<ExchangeData> GetExchangeRates();
+
+		IEnumerable<ExchangeData> GetExchangeRates(ExchangeDataSorter sorter);
 	}
 }

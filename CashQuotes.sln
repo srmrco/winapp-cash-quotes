@@ -22,6 +22,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Unit", "Tests\Tests.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuoteService", "Services\QuoteService\QuoteService.csproj", "{10FDA89D-C911-458C-8E3B-B6ACEC9701C5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C1C4CDAB-1616-4162-8112-CD7A28A79FED}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		CashQuotes\CashQuotes.Shared\CashQuotes.Shared.projitems*{03153d49-f298-4567-b987-2d2f7ce5b588}*SharedItemsImports = 4

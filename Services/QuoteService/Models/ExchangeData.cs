@@ -22,4 +22,11 @@ namespace QuoteService.Models
 
 		public decimal? Distance { get; set; }
 	}
+
+	public enum ExchangeDataSortField
+	{
+		ByBuyRate = 1,
+		BySellRate,
+		ByDistance
+	}
 }

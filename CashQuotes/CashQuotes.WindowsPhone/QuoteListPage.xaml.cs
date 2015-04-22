@@ -1,11 +1,14 @@
 ﻿using Windows.Foundation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using CashQuotes.Controls;
 using QuoteService.Interfaces;
 using QuoteService.Models;
 using QuoteService.Services.Rbc;
+using QuoteService.Utils;
 
 namespace CashQuotes
 {
@@ -103,7 +106,31 @@ namespace CashQuotes
 
 		private void SortAppBarButton_OnClick(object sender, RoutedEventArgs e)
 		{
-			// TODO: show a menu to choose how to sort the grid data
+			// Ensure we have an app bar
+			if (BottomAppBar == null) return;
+
+			// Get the button just clicked
+			var sortButton = sender as AppBarButton;
+			if (sortButton == null) return;
+
+			// Get the attached flyout
+			var sortFlyout = (Flyout)Resources["SortMenuFlyout"];
+			if (sortFlyout == null) return;
+
+			var grid = sortFlyout.Content as Grid;
+			if (grid == null)
+				return;
+
+			grid.Tapped += delegate(object o, TappedRoutedEventArgs args)
+			{
+				var transparentGrid = args.OriginalSource as Grid;
+				if (transparentGrid != null)
+				{
+					sortFlyout.Hide();
+				}
+			};
+
+			sortFlyout.ShowAt(BottomAppBar);
 		}
 
 		private void ItemsGridView_OnItemClick(object sender, ItemClickEventArgs e)
@@ -116,6 +143,53 @@ namespace CashQuotes
 				if (mainFrame != null)
 					mainFrame.Navigate(typeof(QuoteDetailsPage), dataItem);
 			}
+		}
+
+		private void ButtonOnFlyout_Click(object sender, RoutedEventArgs e)
+		{
+			var selectedItem = sender as ButtonBase;
+			ExchangeDataSorter sorter = null;
+
+			if (selectedItem != null)
+			{
+				switch (selectedItem.Tag.ToString())
+				{
+					case "buy":
+						sorter = new ExchangeDataSorter(ExchangeDataSortField.ByBuyRate, ExchangeDataSorter.SortOrder.Desc);
+						break;
+					case "sell":
+						sorter = new ExchangeDataSorter(ExchangeDataSortField.BySellRate, ExchangeDataSorter.SortOrder.Asc);
+						break;
+					case "distance":
+						sorter = new ExchangeDataSorter(ExchangeDataSortField.ByDistance, ExchangeDataSorter.SortOrder.Asc);
+						break;
+				}
+			}
+
+			if (sorter != null)
+				ItemGridView.ItemsSource = _service.GetExchangeRates(sorter);
+
+			// close the flyout
+			var sortFlyout = (Flyout)Resources["SortMenuFlyout"];
+			if (sortFlyout != null)
+				sortFlyout.Hide();
+
+		}
+
+		private void FlyoutBase_OnOpening(object sender, object e)
+		{
+			if (BottomAppBar == null)
+				return;
+
+			BottomAppBar.Visibility = Visibility.Collapsed;
+		}
+
+		private void FlyoutBase_OnClosed(object sender, object e)
+		{
+			if (BottomAppBar == null)
+				return;
+
+			BottomAppBar.Visibility = Visibility.Visible;
 		}
 	}
 }
