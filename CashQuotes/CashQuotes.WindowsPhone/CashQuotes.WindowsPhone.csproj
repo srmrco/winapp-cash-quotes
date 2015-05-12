@@ -98,6 +98,7 @@
     <Compile Include="QuoteListPage.xaml.cs">
       <DependentUpon>QuoteListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Workflows\GeopositionFlow.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

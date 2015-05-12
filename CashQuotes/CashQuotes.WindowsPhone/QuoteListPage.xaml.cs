@@ -5,6 +5,7 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using CashQuotes.Controls;
+using CashQuotes.Workflows;
 using QuoteService.Interfaces;
 using QuoteService.Models;
 using QuoteService.Services.Rbc;
@@ -102,6 +103,7 @@ namespace CashQuotes
 		private void RefreshAppBarButton_Click(object sender, RoutedEventArgs e)
 		{
 			ItemGridView.ItemsSource = _service.GetExchangeRates();
+			GeopositionFlow.Instance.UpdateGeopositionAsync();
 		}
 
 		private void SortAppBarButton_OnClick(object sender, RoutedEventArgs e)

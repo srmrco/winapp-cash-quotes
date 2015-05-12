@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkID=390556
+using CashQuotes.Workflows;
 using QuoteService.Models;
 using QuoteService.Utils;
 
@@ -53,7 +54,7 @@ namespace CashQuotes
 
 			try
 			{
-				var currentGeoposition = rootPage.CurrentGeoposition.Coordinate.Point;
+				var currentGeoposition = GeopositionFlow.Instance.CurrentGeoposition.Coordinate.Point;
 
 				var targets = await MapLocationFinder.FindLocationsAsync(quoteData.Address, currentGeoposition);
 				if (targets.Status != MapLocationFinderStatus.Success || targets.Locations.Count == 0)

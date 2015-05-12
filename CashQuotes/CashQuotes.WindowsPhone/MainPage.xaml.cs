@@ -2,6 +2,7 @@
 using Windows.Devices.Geolocation;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using CashQuotes.Workflows;
 
 namespace CashQuotes
 {
@@ -12,8 +13,6 @@ namespace CashQuotes
 	{
 		public static MainPage Current;
 
-		public Geoposition CurrentGeoposition;
-
 		public MainPage()
 		{
 			this.InitializeComponent();
@@ -23,7 +22,6 @@ namespace CashQuotes
 			// This is a static public property that allows downstream pages to get a handle to the MainPage instance
 			// in order to call methods that are in this class.
 			Current = this;
-			CurrentGeoposition = null;
 
 			Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
 		}
@@ -33,20 +31,16 @@ namespace CashQuotes
 		/// </summary>
 		/// <param name="e">Event data that describes how this page was reached.
 		/// This parameter is typically used to configure the page.</param>
-		protected override async void OnNavigatedTo(NavigationEventArgs e)
+		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			if (MainFrame.Content == null)
 			{
+				GeopositionFlow.Instance.UpdateGeopositionAsync();
+
 				if (!MainFrame.Navigate(typeof(QuoteListPage)))
 				{
 					throw new Exception("Failed to navigate to a page with a list of Quotes");
 				}
-			}
-
-			if (CurrentGeoposition == null)
-			{
-				var geolocator = new Geolocator {DesiredAccuracyInMeters = 50};
-				CurrentGeoposition = await geolocator.GetGeopositionAsync();
 			}
 		}
 

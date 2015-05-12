@@ -1,10 +1,19 @@
-﻿namespace CashQuotes.Controls
+﻿using Windows.UI.Xaml.Controls;
+using CashQuotes.Workflows;
+using QuoteService.Utils;
+
+namespace CashQuotes.Controls
 {
 	public sealed partial class ItemViewer
 	{
-		public void ShowDistance()
+		public async void ShowDistance()
 		{
-			//TODO: calculate and show distance if possible
+			_item.Distance = await GeopositionFlow.Instance.GetDistanceToAddress(_item.Address);
+
+			if (_item.Distance.HasValue)
+				TxtDistance.Text = FormatHelper.FormatDistance(_item.Distance);
+			else
+				TxtDistance.ClearValue(TextBlock.TextProperty);
 		}
 	}
 }
