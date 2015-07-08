@@ -8,10 +8,10 @@ namespace CashQuotes.Controls
 	{
 		public async void ShowDistance()
 		{
-			_item.Distance = await GeopositionFlow.Instance.GetDistanceToAddress(_item.Address);
+			Item.Distance = await GeopositionFlow.Instance.GetDistanceToAddress(Item.Address);
 
-			if (_item.Distance.HasValue)
-				TxtDistance.Text = FormatHelper.FormatDistance(_item.Distance);
+			if (Item.Distance.HasValue)
+				TxtDistance.Text = FormatHelper.FormatDistance(Item.Distance);
 			else
 				TxtDistance.ClearValue(TextBlock.TextProperty);
 		}

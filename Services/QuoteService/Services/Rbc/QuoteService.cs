@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using HtmlAgilityPack;
 using QuoteService.Interfaces;
 using QuoteService.Models;
@@ -24,16 +25,16 @@ namespace QuoteService.Services.Rbc
 
 		public IEnumerable<ExchangeData> GetExchangeRates()
 		{
-			var sorter = new ExchangeDataSorter(ExchangeDataSortField.ByBuyRate);
-			var result = GetExchangeRates(sorter);
+			var sorter = ExchangeDataSorter.GetDefault();
+			var result = GetExchangeRatesAsync(sorter).Result;
 
 			return result;
 		}
 
-		public IEnumerable<ExchangeData> GetExchangeRates(ExchangeDataSorter sorter)
+		public async Task<IEnumerable<ExchangeData>> GetExchangeRatesAsync(ExchangeDataSorter sorter)
 		{
 			var result = new SortedSet<ExchangeData>(sorter);
-			var dataText = DataProvider.GetQuoteDocumentText();
+			var dataText = await DataProvider.GetQuoteDocumentTextAsync();
 
 			if (string.IsNullOrEmpty(dataText))
 				return result;

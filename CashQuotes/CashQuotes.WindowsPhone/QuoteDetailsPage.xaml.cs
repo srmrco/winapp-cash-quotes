@@ -75,7 +75,7 @@ namespace CashQuotes
 
 				DistanceBlock.Text = FormatHelper.FormatDistance(quoteData.Distance);
 			}
-			catch (Exception ex)
+			catch (Exception)
 			{
 				//TODO handle geo exception
 			}

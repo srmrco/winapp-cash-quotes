@@ -1,46 +1,76 @@
 ﻿<UserControl
-    x:Class="CashQuotes.Controls.ItemViewer"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:CashQuotes.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:models="using:QuoteService.Models"
+    xmlns:converters="using:CashQuotes.Converters"
+    x:Class="CashQuotes.Controls.ItemViewer"
     mc:Ignorable="d"
-    d:DesignHeight="100" d:DesignWidth="350">
-        <Grid HorizontalAlignment="Left" 
-          Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Width="auto">
-            <StackPanel Margin="10,10,0,0" Orientation="Vertical">
-                <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
-                    <TextBlock x:Name="TxtBuyRate" TextWrapping="Wrap" 
-                           Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
-                           FontSize="25" FontWeight="Bold" Width="110" 
-                           VerticalAlignment="Center" HorizontalAlignment="Left" 
-                           FontFamily="Segoe UI" Text="165.12 р."/>
-                    <TextBlock x:Name="TxtSellRate" TextWrapping="Wrap" Margin="20 0"
-                           Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
-                           FontSize="25" FontWeight="Bold" Width="110" 
-                           VerticalAlignment="Center" HorizontalAlignment="Left" 
-                           FontFamily="Segoe UI" Text="169.12 р."/>
+    d:DesignHeight="100" d:DesignWidth="350"
+    d:DataContext="{Binding Source={d:DesignData Source=/DataModel/SampleExchangeData.json, Type=models:ExchangeData}}"
+    DataContext="{Binding}">
 
-                </StackPanel>
-                <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
-                    <TextBlock x:Name="TxtName" TextWrapping="Wrap" 
-                           Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
-                           FontSize="14.667" FontWeight="Light" Width="250" 
-                           VerticalAlignment="Center" HorizontalAlignment="Left" 
-                           FontFamily="Segoe UI" Text="Name of the place"/>
-                    
-                    <TextBlock x:Name="TxtDistance" TextWrapping="Wrap" Margin="0"
-                           Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
-                           FontSize="18" FontWeight="Normal" Width="80" 
-                           VerticalAlignment="Center" HorizontalAlignment="Left" 
-                           FontFamily="Segoe UI" Text="20 km" TextAlignment="Right"/>
-                </StackPanel>
-                <TextBlock Name="TxtAddress" TextWrapping="Wrap" Margin="0"
-                           Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
-                           FontSize="16" FontWeight="Normal" Width="auto" 
-                           VerticalAlignment="Center" HorizontalAlignment="Left" 
-                           FontFamily="Segoe UI" Text="Address line" TextAlignment="Left"/>
+    <UserControl.Resources>
+
+        <converters:DistanceConverter x:Key="DistanceConverter"/>
+        <converters:MoneyConverter x:Key="MoneyConverter"/>
+        <converters:AddressConverter x:Key="AddressConverter"/>
+
+        <Style x:Key="TextBlockBaseStyle" TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="Segoe UI"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+        </Style>
+
+        <Style x:Key="RatesTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Width" Value="110"/>
+        </Style>
+
+        <Style x:Key="LesserTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource TextBlockBaseStyle}">
+            <Setter Property="FontWeight" Value="Normal"/>
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid HorizontalAlignment="Left" 
+		Background="{StaticResource ApplicationPageBackgroundThemeBrush}" 
+		Width="auto">
+        <StackPanel Margin="10,10,0,0" Orientation="Vertical">
+            <StackPanel Margin="0,0,0,0" Orientation="Horizontal">
+                <TextBlock x:Name="TxtBuyRate" 
+					Style="{StaticResource RatesTextBlockStyle}"
+					Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+					Text="{Binding BuyRate, Converter={StaticResource MoneyConverter}}"/>
+                <TextBlock x:Name="TxtSellRate" 
+					Style="{StaticResource RatesTextBlockStyle}"
+					Margin="20 0"
+					Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+					Text="{Binding SellRate, Converter={StaticResource MoneyConverter}}"/>
+
             </StackPanel>
-        </Grid>
-    </UserControl>
+            <StackPanel Margin="0" Orientation="Horizontal">
+                <TextBlock x:Name="TxtName"
+					Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+					Style="{StaticResource LesserTextBlockStyle}"
+					FontSize="15" Width="250" 
+					Text="{Binding Name, Converter={StaticResource AddressConverter}}"/>
+
+                <TextBlock x:Name="TxtDistance" Margin="0"
+					Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+					Style="{StaticResource LesserTextBlockStyle}"
+					FontSize="18" Width="80" TextAlignment="Right"
+					Text="{Binding Distance, Converter={StaticResource DistanceConverter}}" />
+            </StackPanel>
+            <TextBlock x:Name="TxtAddress" Margin="0"
+				Foreground="{StaticResource ApplicationForegroundThemeBrush}" 
+				Style="{StaticResource LesserTextBlockStyle}"
+				FontSize="16" TextAlignment="Left"
+				Text="{Binding Address}" />
+        </StackPanel>
+    </Grid>
+</UserControl>

@@ -1,9 +1,11 @@
-﻿namespace QuoteService.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace QuoteService.Interfaces
 {
 	public interface IQuoteDataProvider
 	{
 		IQueryBuilder QueryBuilder { get; set; }
 
-		string GetQuoteDocumentText();
+		Task<string> GetQuoteDocumentTextAsync();
 	}
 }

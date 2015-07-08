@@ -16,7 +16,7 @@ namespace QuoteService.Utils
 
 		public SortOrder SortDirection { get; set; }
 
-		public ExchangeDataSorter()
+		private ExchangeDataSorter()
 		{
 			SortField = ExchangeDataSortField.ByBuyRate;
 			SortDirection = SortOrder.Desc;
@@ -33,6 +33,11 @@ namespace QuoteService.Utils
 		{
 			SortField = field;
 			SortDirection = direction;
+		}
+
+		public static ExchangeDataSorter GetDefault()
+		{
+			return new ExchangeDataSorter(ExchangeDataSortField.ByBuyRate);
 		}
 
 		public int Compare(ExchangeData x, ExchangeData y)

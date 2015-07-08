@@ -57,13 +57,13 @@
     <Compile Include="Utils\MockQuoteDataProvider.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MockData\test-data.html" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\Services\QuoteService\QuoteService.csproj">
       <Project>{10fda89d-c911-458c-8e3b-b6acec9701c5}</Project>
       <Name>QuoteService</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="MockData\test-data.html" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

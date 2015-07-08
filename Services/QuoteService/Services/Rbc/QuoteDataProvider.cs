@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 using QuoteService.Interfaces;
 using QuoteService.Utils;
 
@@ -19,7 +20,7 @@ namespace QuoteService.Services.Rbc
 			QueryBuilder = queryBuilder;
 		}
 
-		public string GetQuoteDocumentText()
+		public async Task<string> GetQuoteDocumentTextAsync()
 		{
 			var result = string.Empty;
 			var buildUrl = QueryBuilder.Build();
@@ -30,10 +31,10 @@ namespace QuoteService.Services.Rbc
 
 			using (var client = new HttpClient())
 			{
-				var response = client.GetAsync(resourceUri).Result;
+				var response = await client.GetAsync(resourceUri);
 				if (response.IsSuccessStatusCode)
 				{
-					result = response.Content.ReadAsStringAsync().Result;
+					result = await response.Content.ReadAsStringAsync();
 				}
 			}
 

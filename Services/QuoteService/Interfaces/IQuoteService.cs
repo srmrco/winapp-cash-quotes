@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using QuoteService.Models;
 using QuoteService.Utils;
 
@@ -10,6 +11,6 @@ namespace QuoteService.Interfaces
 
 		IEnumerable<ExchangeData> GetExchangeRates();
 
-		IEnumerable<ExchangeData> GetExchangeRates(ExchangeDataSorter sorter);
+		Task<IEnumerable<ExchangeData>> GetExchangeRatesAsync(ExchangeDataSorter sorter);
 	}
 }

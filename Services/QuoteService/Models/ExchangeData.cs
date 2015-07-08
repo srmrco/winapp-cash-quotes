@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace QuoteService.Models
 {
-	public class ExchangeData
+	[DebuggerDisplay("{Address}")]
+	public class ExchangeData 
 	{
 		public string Name { get; set; }
 

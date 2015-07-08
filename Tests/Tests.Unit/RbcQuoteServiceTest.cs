@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuoteService.Models;
 using QuoteService.Services.Rbc;
@@ -62,7 +60,7 @@ namespace Tests.Unit
 			var service = new QS(quoteProvider);
 
 			var sorter = new ExchangeDataSorter(ExchangeDataSortField.ByBuyRate);
-			var result = service.GetExchangeRates(sorter);
+			var result = service.GetExchangeRatesAsync(sorter).Result;
 
 			var previousValue = sorter.SortDirection == ExchangeDataSorter.SortOrder.Asc ? decimal.MinValue : decimal.MaxValue;
 			foreach (var item in result)
@@ -78,5 +76,7 @@ namespace Tests.Unit
 				}
 			}
 		}
+
+		
 	}
 }

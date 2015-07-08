@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Threading.Tasks;
 using QuoteService.Interfaces;
 
 namespace Tests.Unit.Utils
@@ -7,9 +8,9 @@ namespace Tests.Unit.Utils
 	{
 		public IQueryBuilder QueryBuilder { get; set; }
 
-		public string GetQuoteDocumentText()
+		public Task<string> GetQuoteDocumentTextAsync()
 		{
-			var result = File.ReadAllText("../../MockData/test-data.html");
+			var result = Task.Run(() => File.ReadAllText("../../MockData/test-data.html"));
 
 			return result;
 		}
